@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestra Historia ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: black;
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease;
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    background: crimson;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background: red;
+}
+
+p {
+    max-width: 400px;
+    line-height: 1.6;
+}
+
+/* 🔥 IMÁGENES */
+img {
+    width: 250px;
+    border-radius: 15px;
+    margin-top: 15px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 1s ease;
+}
+
+.visible img {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* 🔥 GALERÍA */
+.galeria {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.galeria img {
+    width: 120px;
+    border-radius: 10px;
+}
+
+/* Corazones */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    color: red;
+    font-size: 20px;
+    animation: floatUp 5s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<div class="section visible">
+    <h1>No sabía que un día normal…</h1>
+    <p>…iba a convertirse en algo tan importante para mí ❤️</p>
+    <img src="foto1.jpeg">
+    <button onclick="nextSection()">Toca aquí</button>
+</div>
+
+<div class="section">
+    <h1>El inicio</h1>
+    <p>De todas las personas en el mundo… terminé encontrándote a ti, y no cambiaría eso por nada ✨</p>
+    <img src="foto6.jpeg">
+    <button onclick="nextSection()">Siguiente</button>
+</div>
+
+<div class="section">
+    <h1>Nuestro tiempo</h1>
+    <p>
+    Hay demasiados momentos como para ponerlos todos aquí…  
+    pero cada uno de ellos han valido completamente la pena.  
+    Y los que vienen… aún más ❤️
+    </p>
+
+    <img src="foto9.jpeg">
+    <img src="foto8.jpeg">
+    <img src="foto14.jpeg">
+    <img src="foto15.jpeg">
+    <img src="foto16.jpeg">
+    <img src="foto13.jpeg">
+
+    <button onclick="nextSection()">Siguiente</button>
+</div>
+
+<div class="section">
+    <h1>Lo que siento por ti</h1>
+    <p>
+    No todo es perfecto, hay días raros, días pesados…  
+    pero incluso en esos momentos, sigo queriendo estar contigo.  
+
+    Porque no eres solo alguien que quiero…  
+    eres alguien que elijo, todos los días. ❤️
+    </p>
+    <img src="foto7.jpeg">
+    <button onclick="nextSection()">Siguiente</button>
+</div>
+
+<div class="section">
+    <h1>👀</h1>
+    <button onclick="reveal()">No le piques… o sí</button>
+
+    <p id="hiddenText" style="display:none; margin-top:20px;">
+        Feliz aniversario ❤️<br><br>
+        Gracias por quedarte…<br>
+        Por elegirme…<br>
+        y por hacerme tan feliz.<br><br>
+        Te quiero muchísimo 💖
+    </p>
+
+    <!-- 🔥 GALERÍA OCULTA -->
+    <div class="galeria" id="galeria">
+        <img src="foto25.jpeg">
+        <img src="foto20.jpeg">
+        <img src="foto21.jpeg">
+        <img src="foto22.jpeg">
+    </div>
+</div>
+
+<div class="section">
+    <h1>Esto apenas empieza… 🌙</h1>
+    <p>Y si es contigo… quiero todo lo que venga ❤️</p>
+</div>
+
+<script>
+let current = 0;
+let sections = document.querySelectorAll(".section");
+
+function nextSection() {
+    if (current < sections.length - 1) {
+        sections[current].classList.remove("visible");
+        current++;
+        sections[current].classList.add("visible");
+    }
+
+    document.getElementById("music").play();
+}
+
+function reveal() {
+    // 🔥 Mostrar texto
+    document.getElementById("hiddenText").style.display = "block";
+
+    // 🔥 Mostrar galería
+    let galeria = document.getElementById("galeria");
+    galeria.style.display = "flex";
+
+    setTimeout(() => {
+        galeria.style.opacity = "1";
+    }, 100);
+
+    // ❌ Ya no cambia automáticamente de sección
+}
+
+/* Corazones */
+setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (10 + Math.random() * 20) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+}, 500);
+</script>
+
+</body>
+</html>
